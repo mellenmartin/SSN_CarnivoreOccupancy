@@ -1,3 +1,3 @@
 # SSN_CarnivoreOccupancy
 
-Code and formatted/extracted data to replicate annual analyses evaluating the effects of changing forest structure and climate conditions on the occupancy of fishers, martens, grey foxes, and ringtails.
+Code, JAGS model output, and formatted/extracted data to replicate dynamic occupancy analyses evaluating the effects of climate conditions and future climate projections on the occupancy of fishers, martens, grey foxes, and ringtails.
