@@ -1,4 +1,4 @@
-# SSN_CarnivoreOccupancy
+# Effects of climate conditions on current and future occurrence of mesocarnivores in the southern Sierra Nevada
 
 Code, initial values, and formatted/extracted data to replicate dynamic occupancy analyses evaluating the effects of climate conditions and future climate projections on the occupancy of fishers, martens, grey foxes, and ringtails. JAGS model output was too large to upload in command line chains or RDS format...
 
@@ -38,4 +38,36 @@ There are 5 files in this folder:
 | MidElevNK     | vector     | occupancy grid cell IDs at mid elev that do not intersect the Kern Plateau [1:463]                                                          |
 | HigElevNK     | vector     | occupancy grid cell IDs at high elev that do not intersect the Kern Plateau [1:302]                                                         |
 
+
 **./JAGSmodel/SN_inits1.txt, SN_inits2.txt, SN_inits3.txt:** initial values for JAGS model
+
+
+**./JAGSmodel/SSNOccupancy_ParamSummary.csv:** initial values for JAGS model
+| Parameter     | Type           | Description                                                                                                                             |
+| ------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| b0tracks      | det intercept  | trackplate observation process intercept, allowed to vary by year and species    [1:14; 1:4]               |
+| b1            | det slope      | effect of canopy cover (scancov) within 100 m of trackplate station on species-specific detection probability    [1:4]                  |
+| b2            | det slope      | effect of standard deviation of canopy cover (ssdcancov) within 100 m of trackplate station on species-specific detection probability    [1:4]                |
+| b3            | det slope      | effect of whether species <i>s</i> was previously detected at trackplate station on species-specific detection probability    [1:4]     |
+| c0cams        | det intercept  | camera observation process intercept, allowed to vary by year and species    [1:14; 1:4]               |
+| c1            | det slope      | effect of canopy cover (scancov) within 100 m of trackplate station on species-specific detection probability    [1:4]                  |
+| c2            | det slope      | effect of standard deviation of canopy cover (ssdcancov) within 100 m of trackplate station on species-specific detection probability    [1:4]                |
+| c3            | det slope      | effect of whether species <i>s</i> was previously detected at trackplate station on species-specific detection probability    [1:4]     |
+| c4            | det slope      | effect of camera model 1 (1/0) on species-specific detection probability    [1:4] |
+| c5            | det slope      | whether camera was deployed -- can be 0 [no], 1 [yes], NA [not deployed]; note, essentially nuisance parameter given NAs in ycams       |
+| d0            | occ intercept  | scaled canopy cover covariate at each station in each unit in each year [1:202; 1:9; 1:14]                                              |
+| d1            | occ slope      | scaled standard deviation of canopy cover covariate at each station in each unit in each year [1:202; 1:9; 1:14]                        |
+| d2            | occ slope      | whether trackplate detected species <i>s</i> in the previous check -- can be 0 [no], 1 [yes] [1:202; 1:14; 1:9; 1:5; 1:4]               |
+| d3            | occ slope      | whether camera detected species <i>s</i> in the previous check -- can be 0 [no], 1 [yes] [1:202; 1:14; 1:9; 1:5; 1:4]                   |
+| d4            | occ slope      | scaled canopy cover covariate in each grid cell in each year, including two prediction timepoints [1:1255; 1:16]                        |
+| d5            | occ slope      | scaled standard deviation of canopy cover covariate in each grid cell in each year, including two prediction timepoints [1:1255; 1:16]  |
+| d6            | occ slope      | scaled snowpack covariate in each grid cell in each year, including two prediction timepoints and five climate scenarios [1:1255; 1:16; 1:5] |
+| gtmin         | occ cov matrix | scaled min temp covariate in each grid cell in each year, including two prediction timepoints and five climate scenarios [1:1255; 1:16; 1:5] |
+| gppt          | occ cov matrix | scaled precipitation covariate in each grid cell in each year, including two prediction timepoints and five climate scenarios [1:1255; 1:16; 1:5] |
+| NK            | vector         | occupancy grid cell IDs that do not intersect the Kern Plateau [1:1042] used to index occupancy to prevent estimating marten & ringtail occupancy in Kern (they don't occur there)                                                                                                       |
+| Kern          | vector     | occupancy grid cell IDs that intersect the Kern Plateau [1:217] used to summarize occupancy & other parameters in Kern                      |
+| SQFW          | vector     | occupancy grid cell IDs that intersect the Sequoia NF [1:425] used to summarize occupancy & other parameters in Sequoia NF                  |
+| Sierra        | vector     | occupancy grid cell IDs that intersect the Sierra NF [1:613] used to summarize occupancy & other parameters in Sierra NF                    |
+| LowElevNK     | vector     | occupancy grid cell IDs at low elev that do not intersect the Kern Plateau [1:273]                                                          |
+| MidElevNK     | vector     | occupancy grid cell IDs at mid elev that do not intersect the Kern Plateau [1:463]                                                          |
+| HigElevNK     | vector     | occupancy grid cell IDs at high elev that do not intersect the Kern Plateau [1:302]                                                         |
