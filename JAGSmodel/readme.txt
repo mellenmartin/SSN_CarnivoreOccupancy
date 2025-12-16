@@ -1,1 +1,1 @@
-## JAGS model txt file, data dump, and output (chains)
+## JAGS model txt file, data dump, and initial values
