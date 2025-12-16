@@ -4,7 +4,7 @@ Code, initial values, and formatted/extracted data to replicate dynamic occupanc
 
 <h3>JAGSmodel</h3>
 
-There are 5 files in this folder:
+There are 6 files in this folder:
 
 **./JAGSmodel/SSN_DynOccProjectionModel.R:** The Bayesian dynamic occupancy model to estimate initial occupancy, persistence, and colonization of fishers, gray foxes, martens, and ringtails during observed years, predict occupancy under five climate model scenarios in two time periods, and summarize parameters of interest (e.g., prop occupied, turnover)  
 
