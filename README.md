@@ -1,10 +1,10 @@
 # SSN_CarnivoreOccupancy
 
-Code, JAGS model output, and formatted/extracted data to replicate dynamic occupancy analyses evaluating the effects of climate conditions and future climate projections on the occupancy of fishers, martens, grey foxes, and ringtails.
+Code, initial values, and formatted/extracted data to replicate dynamic occupancy analyses evaluating the effects of climate conditions and future climate projections on the occupancy of fishers, martens, grey foxes, and ringtails. JAGS model output was too large to upload in command line chains or RDS format...
 
 <h3>JAGSmodel</h3>
 
-There are 2 files in this folder, each with code to pass to JAGS to run the models. 
+There are 5 files in this folder:
 
 **./JAGSmodel/SSN_DynOccProjectionModel.R:** The Bayesian dynamic occupancy model to estimate initial occupancy, persistence, and colonization of fishers, gray foxes, martens, and ringtails during observed years, predict occupancy under five climate model scenarios in two time periods, and summarize parameters of interest (e.g., prop occupied, turnover)  
 
@@ -38,3 +38,4 @@ There are 2 files in this folder, each with code to pass to JAGS to run the mode
 | MidElevNK     | vector     | occupancy grid cell IDs at mid elev that do not intersect the Kern Plateau [1:463]                                                          |
 | HigElevNK     | vector     | occupancy grid cell IDs at high elev that do not intersect the Kern Plateau [1:302]                                                         |
 
+**./JAGSmodel/SN_inits1.txt, SN_inits2.txt, SN_inits3.txt:** initial values for JAGS model
