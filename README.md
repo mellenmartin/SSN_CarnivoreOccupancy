@@ -8,7 +8,7 @@ There are 6 files in this folder:
 
 **./JAGSmodel/SSN_DynOccProjectionModel.R:** The Bayesian dynamic occupancy model to estimate initial occupancy, persistence, and colonization of fishers, gray foxes, martens, and ringtails during observed years, predict occupancy under five climate model scenarios in two time periods, and summarize parameters of interest (e.g., prop occupied, turnover)  
 
-**./JAGSmodel/SN_data.txt:**  data formatted for JAGS model via "dump.format" function. Given sensitive status of marten and fisher, raw data cannot be shared, but JAGS data input includes:
+**./JAGSmodel/SN_data.txt:**  data formatted for JAGS model via "dump.format" function. Given sensitive status of marten and fisher, raw detections (including coordinates) cannot be shared, but JAGS data can be used to replicate analysis. Data file includes:
 | List item     | Type           | Description                                                                                                                             |
 | ------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | ytracks       | obs matrix     | whether trackplate detected species <i>s</i> -- can be 0 [no], 1 [yes], NA [not deployed]    [1:202; 1:14; 1:9; 1:5; 1:4]               |
