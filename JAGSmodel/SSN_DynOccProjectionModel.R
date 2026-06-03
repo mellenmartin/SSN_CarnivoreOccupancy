@@ -110,7 +110,7 @@ model {
       for (t in 10:TT1){                  # For each year [5 years with cameras (2010-)]; start in 2011 (year 10)
         for (w in 1:W){                     # For each week/check
           for (s in 1:S){                     # For each species
-            ycams[u,t,r,w,s] ~ dbern(muc[u,t,r,w,s]*camdeployed[u,t,r,w])   # presence/absence each year on cam
+            ycams[u,t,r,w,s] ~ dbern(muc[u,t,r,w,s])   # presence/absence each year on cam
             muc[u,t,r,w,s] <- z[stgrid[u,t,r],t,s]*pcam[u,t,r,w,s]  # true occupancy in the grid cell where camera was placed * probability of detection
             logit(pcam[u,t,r,w,s]) <- c0cams[t,s] + c1[s]*scancov[u,r,t] + c2[s]*ssdcancov[u,r,t] + c3[s]*camtype1[u,t-9,r]
             + c4[s]*camtype2[u,t-9,r] + c5[s]*prevcamdet[u,t,r,w,s]
@@ -126,7 +126,7 @@ model {
       for (w in 1:W){                   # For each week/check
         for (s in 1:S){                   # For each species
           for (t in not10){                 # For each year [second half of study]
-            ytracks[u,t,r,w,s] ~ dbern(mut[u,t,r,w,s]*trackdeployed[u,t,r,w]) # presence/absence each year
+            ytracks[u,t,r,w,s] ~ dbern(mut[u,t,r,w,s]) # presence/absence each year
             mut[u,t,r,w,s] <- z[stgrid[u,t,r],t,s]*ptrack[u,t,r,w,s] # true occupancy * probability of detection
             logit(ptrack[u,t,r,w,s]) <- b0tracks[t,s] + b1[s]*scancov[u,r,t] + b2[s]*ssdcancov[u,r,t] + b3[s]*prevtrackdet[u,t,r,w,s]
           } #t
@@ -227,53 +227,53 @@ model {
   #### Specify priors ####
   for(s in 1:S){
     for(t in 10:TT1){ # 5 years of camera data
-      c0cams[t,s] ~ dnorm(c0.mu[s], c0.tau[s])T(-10,10)
+    c0cams[t,s] ~ dnorm(c0.mu[s], c0.tau[s])T(-10,10)
     } #t
     for(t in not10){ # Preparing intercept as a random effect
-      b0tracks[t,s] ~ dnorm(b0.mu[s], b0.tau[s])T(-10,10)
+    b0tracks[t,s] ~ dnorm(b0.mu[s], b0.tau[s])T(-10,10)
     } #t
     # for(k in 1:2){
-    phi1[s] ~ dnorm(0, 0.000001)T(-10,10)
-    phi2[s] ~ dnorm(0, 0.000001)T(-10,10)
-    phi3[s] ~ dnorm(0, 0.000001)T(-10,10)
-    #phi4[s] ~ dnorm(0, 0.000001)T(-10,10)
-    phi5[s] ~ dnorm(0, 0.000001)T(-10,10)
-    phi6[s] ~ dnorm(0, 0.000001)T(-10,10)
-    gam1[s] ~ dnorm(0, 0.000001)T(-10,10)
-    gam2[s] ~ dnorm(0, 0.000001)T(-10,10)
-    gam3[s] ~ dnorm(0, 0.000001)T(-10,10)
-    #gam4[s] ~ dnorm(0, 0.000001)T(-10,10)
-    gam5[s] ~ dnorm(0, 0.000001)T(-10,10)
-    gam6[s] ~ dnorm(0, 0.000001)T(-10,10)
-    b1[s] ~ dnorm(0, 0.000001)T(-10,10)
-    b2[s] ~ dnorm(0, 0.000001)T(-10,10)
-    b3[s] ~ dnorm(0, 0.000001)T(-10,10)
-    c1[s] ~ dnorm(0, 0.000001)T(-10,10)
-    c2[s] ~ dnorm(0, 0.000001)T(-10,10)
-    c5[s] ~ dnorm(0, 0.000001)T(-10,10)
-    d0[s] ~ dunif(-10, 10)
-    d1[s] ~ dnorm(0, 0.000001)T(-10,10)
-    d2[s] ~ dnorm(0, 0.000001)T(-10,10)
-    d3[s] ~ dnorm(0, 0.000001)T(-10,10)
-    d4[s] ~ dnorm(0, 0.000001)T(-10,10)
-    d5[s] ~ dnorm(0, 0.000001)T(-10,10)
-    d6[s] ~ dnorm(0, 0.000001)T(-10,10)
+    phi1[s] ~ dnorm(0, 0.01)T(-10,10)
+    phi2[s] ~ dnorm(0, 0.01)T(-10,10)
+    phi3[s] ~ dnorm(0, 0.01)T(-10,10)
+    #phi4[s] ~ dnorm(0, 0.01)T(-10,10)
+    phi5[s] ~ dnorm(0, 0.01)T(-10,10)
+    phi6[s] ~ dnorm(0, 0.01)T(-10,10)
+    gam1[s] ~ dnorm(0, 0.01)T(-10,10)
+    gam2[s] ~ dnorm(0, 0.01)T(-10,10)
+    gam3[s] ~ dnorm(0, 0.01)T(-10,10)
+    #gam4[s] ~ dnorm(0, 0.01)T(-10,10)
+    gam5[s] ~ dnorm(0, 0.01)T(-10,10)
+    gam6[s] ~ dnorm(0, 0.01)T(-10,10)
+    b1[s] ~ dnorm(0, 0.01)T(-10,10)
+    b2[s] ~ dnorm(0, 0.01)T(-10,10)
+    b3[s] ~ dnorm(0, 0.01)T(-10,10)
+    c1[s] ~ dnorm(0, 0.01)T(-10,10)
+    c2[s] ~ dnorm(0, 0.01)T(-10,10)
+    c5[s] ~ dnorm(0, 0.01)T(-10,10)
+    d0[s] ~ dnorm(0, 2)
+    d1[s] ~ dnorm(0, 0.01)T(-10,10)
+    d2[s] ~ dnorm(0, 0.01)T(-10,10)
+    d3[s] ~ dnorm(0, 0.01)T(-10,10)
+    d4[s] ~ dnorm(0, 0.01)T(-10,10)
+    d5[s] ~ dnorm(0, 0.01)T(-10,10)
+    d6[s] ~ dnorm(0, 0.01)T(-10,10)
     # } #k
-    c3[s] ~ dnorm(0, 0.000001)T(-10,10)
-    c4[s] ~ dnorm(0, 0.000001)T(-10,10)
-    b0.mu[s] ~ dunif(-10,10)
+    c3[s] ~ dnorm(0, 0.01)T(-10,10)
+    c4[s] ~ dnorm(0, 0.01)T(-10,10)
+    b0.mu[s] ~ dnorm(0,2)
     b0.tau[s] <- pow(b0.sd[s], -2)
-    b0.sd[s] ~ dunif(0,10)
-    c0.mu[s] ~ dunif(-10,10)
+    b0.sd[s] ~ dunif(0,2)
+    c0.mu[s] ~ dnorm(0,2)
     c0.tau[s] <- pow(c0.sd[s], -2)
-    c0.sd[s] ~ dunif(0,10)
-  } #s
-  
-  # Survival/colonization priors
-  for(s in 1:S){
+    c0.sd[s] ~ dunif(0,2)
+    } #s
+
+    # Survival/colonization priors
+    for(s in 1:S){
     # for(k in 1:2){
-    phi.0[s] ~ dunif(-10,10)       # intercept for survival
-    gamma.0[s] ~ dunif(-10,10)     # intercept for colonization
+    phi.0[s] ~ dnorm(0,2)       # intercept for survival
+    gamma.0[s] ~ dnorm(0,2)     # intercept for colonization
     # }
   }
 }
